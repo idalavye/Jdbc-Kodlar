@@ -1,0 +1,35 @@
+package com.proje.statement1;
+
+import java.sql.SQLException;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
+
+public class Uygulama1 {
+	
+	public static void main(String[] args) {
+
+		Logger logger = LogManager.getLogger();
+		
+		Connection connection = DBConnection.getConnection();
+		
+		
+		Statement statement = null;
+		
+		try {
+			statement = (Statement) connection.createStatement();
+			
+			String sorgu = "CREATE TABLE personel(personelId INT PRÝMARY KEY NOT NULL, adi VARCHAR(100), soyadi VARCHAR(100), dogumYili INT,personelNumarasi VARCHAR(50)";
+			
+			statement.execute(sorgu);
+		} catch (SQLException e) {
+			
+			
+		}
+		
+	}
+
+}

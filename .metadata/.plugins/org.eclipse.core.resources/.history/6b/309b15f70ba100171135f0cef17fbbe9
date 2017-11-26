@@ -1,0 +1,16 @@
+package com.proje.connection2;
+
+public class Uygulama2 {
+
+	public static void main(String[] args) {
+		
+	}
+	
+	private static void openConnection(){
+		
+	}
+	
+	private static void closeConnection(){
+		
+	}
+}

@@ -1,0 +1,207 @@
+package com.proje.repository.impl;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+import com.proje.connection.DBConnection;
+import com.proje.model.Product;
+import com.proje.model.queries.ProductQueries;
+import com.proje.repository.ProductRepository;
+
+public class ProductRepositoryImpl implements ProductRepository{
+	private final Logger logger = LogManager.getLogger();
+
+	private Connection connection;
+
+	private PreparedStatement preparedStatement;
+
+	private ResultSet resultSet;
+
+	
+	@Override
+	public Product saveProduct(Product product) {
+		connection = DBConnection.getConnection();
+		
+		// "INSERT INTO product(productId, productName, unitPrice, avaible, addDate, updateDate, categoryId, brandId) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
+		try {
+			
+			LocalDateTime localDateTime = LocalDateTime.now();
+			
+			preparedStatement = (PreparedStatement) connection.prepareStatement(ProductQueries.saveProductQuery);
+			preparedStatement.setInt(1, product.getProductId());
+			preparedStatement.setString(2, product.getProductName());
+			preparedStatement.setDouble(3, product.getProductPrice());
+			preparedStatement.setInt(4, product.getAvaible());
+			preparedStatement.setTimestamp(5, Timestamp.valueOf(localDateTime));
+			preparedStatement.setTimestamp(6, null);
+			
+			//Dikkat Product nesnesine category vermez isek null pointer exception çýkar.
+			
+			preparedStatement.setInt(7, product.getCategory().getCategoryId());
+			preparedStatement.setInt(8, product.getBrand().getBrandId());
+			preparedStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			logger.warn("Ürün eklenirken hata oluþtu. HATA : " + e);
+		}finally {
+			
+			DBConnection.closeConnection(connection, preparedStatement, null);
+		}
+		return product;
+	}
+
+	@Override
+	public boolean saveBatchProduct(List<Product> products) {
+		connection = DBConnection.getConnection();
+		
+		// "INSERT INTO product(productId, productName, unitPrice, avaible, addDate, updateDate, categoryId, brandId) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
+		try {
+			LocalDateTime localDateTime = LocalDateTime.now();
+			
+			preparedStatement = (PreparedStatement) connection.prepareStatement(ProductQueries.saveProductQuery);
+			
+			for(Product product : products){
+				
+				preparedStatement.setInt(1, product.getProductId());
+				preparedStatement.setString(2, product.getProductName());
+				preparedStatement.setDouble(3, product.getProductPrice());
+				preparedStatement.setInt(4, product.getAvaible());
+				preparedStatement.setTimestamp(5, Timestamp.valueOf(localDateTime));
+				preparedStatement.setTimestamp(6, null);
+				
+				//Dikkat Product nesnesine category vermez isek null pointer exception çýkar.
+				
+				preparedStatement.setInt(7, product.getCategory().getCategoryId());
+				preparedStatement.setInt(8, product.getBrand().getBrandId());
+				preparedStatement.addBatch();
+			}
+			
+			preparedStatement.executeBatch();
+			
+		} catch (SQLException e) {
+			
+			logger.warn("Ürün listesi eklenirken hata oluþtu. HATA : " + e);
+			return false;
+		}finally {
+			
+			DBConnection.closeConnection(connection, preparedStatement, null);
+		}
+		
+		return true;
+	}
+
+	@Override
+	public Product updateProduct(Product product) {
+		connection = DBConnection.getConnection();
+		
+		LocalDateTime localDateTime = LocalDateTime.now();
+		
+		// "UPDATE product SET productName = ?, unitPrice =? , avaible =? , updateDate = ?, categoryId = ?, brandId = ? WHERE productId = ?";
+		try {
+			
+			preparedStatement = (PreparedStatement) connection.prepareStatement(ProductQueries.updateProductQuery);
+			
+			preparedStatement.setString(1, product.getProductName());
+			preparedStatement.setDouble(2, product.getProductPrice());
+			preparedStatement.setInt(3, product.getAvaible());
+			preparedStatement.setTimestamp(4, Timestamp.valueOf(localDateTime));
+			preparedStatement.setInt(5, product.getCategory().getCategoryId());
+			preparedStatement.setInt(6, product.getBrand().getBrandId());
+			preparedStatement.setInt(7, product.getProductId());
+			preparedStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+
+			logger.warn("Ürün güncellenirken hata meydana geldi.");
+		}finally {
+			DBConnection.closeConnection(connection, preparedStatement, null);
+		}
+		return product;
+	}
+
+	@Override
+	public boolean removeProduct(int id) {
+		connection = DBConnection.getConnection();
+		
+		// "DELETE FROM user_product WHERE productId = ?";
+		// "DELETE FROM product WHERE productId = ?";
+		try {
+			preparedStatement = (PreparedStatement) connection.prepareStatement(ProductQueries.deleteUser_ProductQuery);
+			preparedStatement.setInt(1, id);
+			preparedStatement.executeUpdate();
+			
+			preparedStatement = (PreparedStatement) connection.prepareStatement(ProductQueries.deleteProduct);
+			preparedStatement.setInt(1, id);
+			preparedStatement.executeUpdate();
+		
+		} catch (SQLException e) {
+			
+			logger.warn("Ürün silinirken hata meydana geldi. HATA : " + e);
+			return false;
+		}finally {
+			DBConnection.closeConnection(connection, preparedStatement, null);
+		}
+		return true;
+	}
+
+	@Override
+	public Product findProductById(int id) {
+connection = DBConnection.getConnection();
+		
+		Product product = null;
+		
+		//  "SELECT * FROM product p LEFT JOIN category c on(p.categoryId = c.categoryId) LEFT JOIN brand b on(p.brandId = b.brandId) WHERE productId = ?"
+		try {
+			
+			preparedStatement = (PreparedStatement) connection.prepareStatement(ProductQueries.findProductByIdQuery);
+			preparedStatement.setInt(1, id);
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()){
+				
+				int productId = resultSet.getInt("productId");
+				String productName  = resultSet.getString("productName");
+				double unitPrice = resultSet.getDouble("unitPrice");
+				int avaible = resultSet.getInt("avaible");
+				Date addDate = resultSet.getDate("addDate");
+				Date updateDate = resultSet.getDate("updateDate");
+				
+				int categoryId = resultSet.getInt("categoryId");
+				String categoryName = resultSet.getString("categoryName");
+				
+				int brandId = resultSet.getInt("brandId");
+				String brandName = resultSet.getString("brandName");
+				
+				Category category = new Category(categoryId, categoryName);
+				Brand brand = new Brand(brandId, brandName);
+				
+				product = new Product(productId, productName, unitPrice, avaible, addDate, updateDate, category, brand);
+			}
+			
+		} catch (SQLException e) {
+
+			logger.warn(id + " idli ürün aranýrken hata meydana geldi. HATA : " + e);
+		}finally {
+			DBConnection.closeConnection(connection, preparedStatement, resultSet);
+		}
+		return product;
+	}
+
+	@Override
+	public List<Product> findProducts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,10 @@
+package com.proje.service.impl;
+
+import com.proje.repository.UserRepository;
+import com.proje.repository.impl.UserRepositoryImpl;
+
+public class UserServiceImpl {
+	
+	private UserRepository userRepository = new UserRepositoryImpl();
+
+}

@@ -1,0 +1,13 @@
+package com.proje.connection;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class DBConnection {
+	
+	private static final Logger logger = LogManager.getLogger();
+	
+	static{//Deðiþmeyecek deðerler ve sadece birkez çalýþcak deðerler varsa bunun içinde tanýmlayabiliriz.
+		
+	}
+}

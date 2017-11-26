@@ -1,0 +1,10 @@
+package com.proje.service.impl;
+
+import com.proje.repository.CategoryRepository;
+import com.proje.repository.impl.CategoryRepositoryImpl;
+
+public class CategoryServiceImpl {
+	
+	private CategoryRepository categoryRepository = new CategoryRepositoryImpl();
+
+}

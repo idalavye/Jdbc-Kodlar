@@ -1,0 +1,65 @@
+package com.proje.connection;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.mysql.jdbc.Connection;
+
+public class DBConnection {
+
+	private static final Logger logger = LogManager.getLogger();
+
+	private static String driver;
+	private static String url;
+	private static String username;
+	private static String password;
+
+	// Bir kere çalýþýyor birdaha çalýþmýyor.
+	static {// Deðiþmeyecek deðerler ve sadece birkez çalýþcak deðerler varsa
+			// bunun içinde tanýmlayabiliriz.
+
+		Properties properties = new Properties();
+
+		try {
+			InputStream inputStream = new FileInputStream("src/main/resources/database.properties");
+			properties.load(inputStream);
+
+			driver = properties.getProperty("db_driver");
+			url = properties.getProperty("db_url");
+			username = properties.getProperty("db_user");
+			password = properties.getProperty("db_password");
+
+		} catch (IOException e) {
+
+			logger.warn("database.propertie dosyasýna baðlanýrken bir hata meydana geldi.");
+
+		}
+	}
+	
+	public static Connection getConnection(){
+		
+		Connection connection = null;
+		
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			logger.warn("Drivera baðlanýrken bir hata meydana geldi.");
+		}
+		
+		try {
+			connection = (Connection) DriverManager.getConnection(url, username, password);
+		} catch (SQLException e) {
+			logger.warn("Baðlantý oluþurken bir hata meydana geldi.");
+		}
+		
+		return null;
+	}
+}

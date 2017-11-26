@@ -1,0 +1,20 @@
+package com.proje.connection2;
+
+import com.mysql.jdbc.Connection;
+
+public class Uygulama2 {
+	
+	private static Connection connection = null;
+
+	public static void main(String[] args) {
+		
+	}
+	
+	private static void openConnection(){
+		
+	}
+	
+	private static void closeConnection(){
+		
+	}
+}

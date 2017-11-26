@@ -1,0 +1,10 @@
+package com.proje.service.impl;
+
+import com.proje.repository.ProductRepository;
+import com.proje.repository.impl.ProductRepositoryImpl;
+
+public class ProductServiceImpl {
+	
+	private ProductRepository productRepository = new ProductRepositoryImpl();
+
+}

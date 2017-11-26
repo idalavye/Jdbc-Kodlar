@@ -1,0 +1,38 @@
+package com.proje.test;
+
+import java.util.Scanner;
+
+public class Deneme {
+	
+	public static void main(String[] args) {
+		
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Satýr sayýsý giriniz...:");
+		
+		int satýr = scanner.nextInt();
+		int eleman = 0;
+		int eleman1453 = -1;
+		
+		int i = 0;
+		while(true){
+			int c = 1;
+			
+			for(int x = 0; x<=i;x++){
+				eleman++;
+				
+				if(eleman == 8){
+					eleman1453 = c;
+					return;
+				}
+				
+				c = c*(i-x) /(x+1);
+			}
+			i++;
+		}
+		
+		if(eleman1453 != -1)
+			System.out.println("1453. Eleman :" + eleman1453);
+		
+	}
+
+}

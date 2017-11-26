@@ -1,0 +1,18 @@
+package com.proje.batchInsert;
+
+import java.util.ArrayList;
+
+public class Uygulama {
+	
+	public static void main(String[] args) {
+		
+		Personel personel1 = new Personel(110, "ibrahim", "Daðdelen", 1997, "b151210104");
+		Personel personel1 = new Personel(111, "ibrahim", "Daðdelen", 1997, "b151210104");
+		Personel personel1 = new Personel(112, "ibrahim", "Daðdelen", 1997, "b151210104");
+		Personel personel1 = new Personel(113, "ibrahim", "Daðdelen", 1997, "b151210104");
+		Personel personel1 = new Personel(114, "ibrahim", "Daðdelen", 1997, "b151210104");
+		
+		List<Personel> personels = new ArrayList<>();
+	}
+
+}

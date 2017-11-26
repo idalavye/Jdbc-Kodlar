@@ -1,0 +1,52 @@
+package com.proje.service.impl;
+
+import java.util.List;
+
+import com.proje.model.Product;
+import com.proje.repository.ProductRepository;
+import com.proje.repository.impl.ProductRepositoryImpl;
+import com.proje.service.ProductService;
+
+public class ProductServiceImpl implements ProductService{
+	
+	private ProductRepository productRepository = new ProductRepositoryImpl();
+
+	@Override
+	public Product saveProduct(Product product) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean saveBatchProduct(List<Product> products) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Product updateProduct(Product product) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean removeProduct(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Product findProductById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> findProducts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
+}

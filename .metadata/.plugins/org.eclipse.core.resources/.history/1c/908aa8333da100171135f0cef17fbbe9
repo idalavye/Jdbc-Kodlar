@@ -1,0 +1,21 @@
+package com.proje.insert3;
+
+public class Personel {
+	
+	private int personelId;
+	
+	private String adi;
+	
+	private String soyadi;
+	
+	private int dogumYili;
+	
+	private String okulNumarasi;
+	
+	public Personel() {
+		
+	}
+	
+	
+
+}

@@ -1,0 +1,17 @@
+package com.proje.update;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Uygulama {
+	
+	public static void main(String[] args) {
+		
+		Personel personel = new Personel(101, "Ýbrahim", "Daðdelen", 2012, "b151210104");
+		
+		personel.setDogumYili(1999);
+		
+		DBProcesses.updatePersonel(personel);
+	}
+
+}

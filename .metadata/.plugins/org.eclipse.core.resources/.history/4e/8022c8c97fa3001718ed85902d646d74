@@ -1,0 +1,59 @@
+package com.proje.repository.impl;
+
+import java.sql.ResultSet;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+import com.proje.model.Product;
+import com.proje.repository.ProductRepository;
+
+public class ProductRepositoryImpl implements ProductRepository{
+	private final Logger logger = LogManager.getLogger();
+
+	private Connection connection;
+
+	private PreparedStatement preparedStatement;
+
+	private ResultSet resultSet;
+
+	@Override
+	public Product saveProduct(Product product) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean saveBatchProduct(List<Product> products) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Product updateProduct(Product product) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean removeProduct(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Product findProductById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> findProducts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

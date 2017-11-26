@@ -1,0 +1,11 @@
+package com.proje.prepareStatement;
+
+public class Uygulama1 {
+
+	public static void main(String[] args) {
+		
+		DBProcesses dbProcesses = new DBProcesses();
+		
+		dbProcesses.createPersonelTable();
+	}
+}

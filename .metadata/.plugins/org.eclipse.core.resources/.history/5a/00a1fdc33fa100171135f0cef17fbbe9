@@ -1,0 +1,21 @@
+package com.proje.insert4;
+
+import java.sql.SQLException;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+import com.proje.DBConnection;
+
+public class Uygulama4 {
+
+	public static void main(String[] args) {
+		
+		Personel personel1 = new Personel(106, "Ýbrahim", "Daðdelen", 1997, "b151210104");
+		
+	}
+	
+	
+}

@@ -1,0 +1,11 @@
+package com.proje.repository;
+
+import com.proje.model.Brand;
+
+public interface BrandRepository {
+	
+	Brand saveBrand(Brand brand);
+	
+	List<Brand> findBrands();
+
+}

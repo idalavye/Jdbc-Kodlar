@@ -1,0 +1,32 @@
+SQL Not :
+
+CREATE DATABASE jdbc_proje
+
+use jdbc_proje
+
+
+CREATE TABLE category(categoryId INT NOT NULL, categoryName varchar(20),primary key(categoryId));
+CREATE TABLE brand(brandId INT NOT NULL, brandName varchar(20),primary key(brandId));
+
+CREATE TABLE product(productId int not null, productName varchar(20),productPrice double, avaible int, addDate datetime, updateDate datetime ,
+ 
+		    categoryId int, brandId int ,primary key(productId),foreign key(categoryId) references category(categoryId),
+
+                    foreign key(brandId) references brand(brandId));	
+
+date = sadece tarih
+datetime = tarih ve saat
+
+create table user(userId int not null, firstName varchar(20), lastName varchar(20), birthOfDate date , username varchar(20), primary key(userId));
+
+create table user_product(userId int not null, productId int not null , foreign key(userId) reference user(userId), foreign key(productId) references product(productId));
+
+**user_product tablosu ara tablo görevi görmektedir. Kendisine ait primary key yoktur. (product ve user arasýndaki bir ara tablo)
+
+**product veya user silerkene ilk önce iliþkisi bulunduðu tablolardan silmeliyiz.(user_product)
+
+select * from user u  LEFT OUTER JOÝN
+
+OUTER -> bire çok iliþki olduðunu belirtmek için
+LEFT -> sol taraf dolu sað taraf boþ olsada getir.
+JOÝN -> iki tabloyu birleþtir.

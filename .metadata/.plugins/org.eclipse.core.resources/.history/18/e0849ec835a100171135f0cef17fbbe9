@@ -1,0 +1,14 @@
+package com.proje.insert2;
+
+public class Uygulama2 {
+
+	public static void main(String[] args) {
+		
+		
+	}
+	
+	public static void savePersonel(int personelId,String adi,String soyadi,int dogumYili,String personelNumarasi){
+		
+		
+	}
+}

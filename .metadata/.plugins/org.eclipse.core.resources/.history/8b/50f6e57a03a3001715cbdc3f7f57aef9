@@ -1,0 +1,5 @@
+package com.proje.connection;
+
+public class DBConnection {
+
+}

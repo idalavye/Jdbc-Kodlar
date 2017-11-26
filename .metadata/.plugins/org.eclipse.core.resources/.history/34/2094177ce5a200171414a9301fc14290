@@ -1,0 +1,9 @@
+package com.proje.model.queries;
+
+public class UserQueries {
+	
+	public static final String saveUserQuery = "insert into user(userId,firstName,lastName,birthOfDate,username) values (?,?,?,?,?)";
+	
+	public static final String saveUser_ProductQuery = "insert into user_product(userId,productId) values(?,?)";
+
+}

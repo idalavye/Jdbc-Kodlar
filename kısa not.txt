@@ -1,0 +1,1 @@
+önyüzle repository arasýnda baðlantý saðlayan kýsmý baðlayan pakate controller diyoruz.

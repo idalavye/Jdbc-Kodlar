@@ -1,0 +1,10 @@
+package com.proje.batchInsert;
+
+public class Uygulama {
+	
+	public static void main(String[] args) {
+		
+		Personel personel1 = new Personel(110, "ibrahim", "Daðdelen", 1997, "b151210104");
+	}
+
+}

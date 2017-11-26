@@ -1,0 +1,184 @@
+package com.proje.repository.impl;
+
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+import com.proje.connection.DBConnection;
+import com.proje.model.User;
+import com.proje.model.queries.UserQueries;
+import com.proje.repository.UserRepository;
+
+public class UserRepositoryImpl implements UserRepository {
+
+	private final Logger logger = LogManager.getLogger();
+
+	private Connection connection;
+
+	private PreparedStatement preparedStatement;
+
+	private ResultSet resultSet;
+	
+	
+
+	@Override
+	public User saveUser(User user) {
+
+		connection = DBConnection.getConnection();
+
+		// insert into user(userId,firstName,lastName,birthOfDate,username)
+		// values (?,?,?,?,?)
+		try {
+			preparedStatement = (PreparedStatement) connection.prepareStatement(UserQueries.saveUserQuery);
+			preparedStatement.setInt(1, user.getUserId());
+			preparedStatement.setString(2, user.getFirstName());
+			preparedStatement.setString(3, user.getLastName());
+			preparedStatement.setDate(4, user.getBirthOfDate());
+			preparedStatement.setString(5, user.getUsername());
+
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException e) {
+
+			logger.warn("user kaydedilirken bir hata meydana geldi.");
+
+		} finally {
+
+			DBConnection.closeConnection(connection, preparedStatement, null);
+		}
+
+		return user;
+	}
+
+	@Override
+	public boolean saveUserProduct(int userId, int productId) {
+
+		connection = DBConnection.getConnection();
+
+		//insert into user_product(userId,productId) values(?,?)
+		try {
+			preparedStatement = (PreparedStatement) connection.prepareStatement(UserQueries.saveUser_ProductQuery);
+			preparedStatement.setInt(1, userId);
+			preparedStatement.setInt(2, productId);
+		
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException e) {
+
+			logger.warn("user_product kaydedilirken bir hata meydana geldi.");
+
+		} finally {
+
+			DBConnection.closeConnection(connection, preparedStatement, null);
+		}
+
+		return true;
+	}
+
+	@Override
+	public User update(User user) {
+		connection = DBConnection.getConnection();
+
+		//update user set firstName =?,lastName=?,birthOfDate =?,username =? where userId=? 
+		try {
+			preparedStatement = (PreparedStatement) connection.prepareStatement(UserQueries.updateUserQuery);
+			
+			preparedStatement.setString(1, user.getFirstName());
+			preparedStatement.setString(2, user.getLastName());
+			preparedStatement.setDate(3, user.getBirthOfDate());
+			preparedStatement.setString(4, user.getUsername());
+			preparedStatement.setInt(5, user.getUserId());
+
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException e) {
+
+			logger.warn("user güncellenirken bir hata meydana geldi.");
+
+		} finally {
+
+			DBConnection.closeConnection(connection, preparedStatement, null);
+		}
+
+		return user;
+	}
+
+	@Override
+	public boolean removeUser(int id) {
+		
+		connection = DBConnection.getConnection();
+		
+		//delete from user_product where userId=?
+		//delete from user where userId =?
+		
+		try {
+			preparedStatement = (PreparedStatement) connection.prepareStatement(UserQueries.deleteUser_ProductQuery);
+			preparedStatement.setInt(1, id);
+			preparedStatement.executeUpdate();
+
+			preparedStatement = (PreparedStatement) connection.prepareStatement(UserQueries.deleteUserByIdQuery);
+			preparedStatement.setInt(1, id);
+			preparedStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+
+			logger.warn("user silinirken bir hata meydana geldi.");
+		}
+		finally{
+			DBConnection.closeConnection(connection, preparedStatement, null);
+		}
+		
+		return true;
+	}
+
+	@Override
+	public User findUserById(int id) {
+		
+		connection = DBConnection.getConnection();
+		
+		User user = null;
+		
+		try {
+			preparedStatement = (PreparedStatement) connection.prepareStatement(UserQueries.findUserById);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()){
+				int userId = resultSet.getInt("userId");
+				String firstName = resultSet.getString("firstName");
+				String lastName = resultSet.getString("lastName");
+				Date birthOfDate = resultSet.getDate("birthOfDate");
+				String username = resultSet.getString("username");
+				
+				user = new User(userId, firstName, lastName, birthOfDate, username;)
+				
+			}
+			
+		} catch (SQLException e) {
+			logger.warn("user bulunurken hata meydana geldi..");
+		}finally{
+			DBConnection.closeConnection(connection, preparedStatement, resultSet);
+		}
+		
+		return null;
+	}
+
+	@Override
+	public User findUsersProductsById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> findUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

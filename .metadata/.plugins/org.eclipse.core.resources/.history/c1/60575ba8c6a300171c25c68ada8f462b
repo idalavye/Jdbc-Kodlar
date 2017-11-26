@@ -1,0 +1,88 @@
+package com.proje.test;
+
+import java.sql.Date;
+import java.util.List;
+
+import com.proje.model.Brand;
+import com.proje.model.Category;
+import com.proje.model.Product;
+import com.proje.model.User;
+import com.proje.service.BrandService;
+import com.proje.service.CategoryService;
+import com.proje.service.ProductService;
+import com.proje.service.UserService;
+import com.proje.service.impl.BrandServiceImpl;
+import com.proje.service.impl.CategoryServiceImpl;
+import com.proje.service.impl.ProductServiceImpl;
+import com.proje.service.impl.UserServiceImpl;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		
+		BrandService brandService = new BrandServiceImpl();
+		
+		CategoryService categoryService = new CategoryServiceImpl();
+		
+		ProductService productService = new ProductServiceImpl();
+		
+		UserService userService = new UserServiceImpl();
+		
+//		List<Brand> brands = brandService.findBrands();
+//		for (Brand brand : brands) {
+//			System.out.println(brand);
+//		}
+		
+		
+//		Brand brand = brandService.saveBrand(1);
+//		System.out.println(brand);
+		
+		
+//		List<Category> categories = categoryService.findCategories();
+//		for (Category category : categories) {
+//			System.out.println(category);
+//		}
+		
+		
+//		Category category = categoryService.findCategoryById(2);
+//		System.out.println(category);
+		
+		
+//		List<Product> products = productService.findProducts();
+//		for (Product product : products) {
+//			System.out.println(product);  
+//			System.out.println(product.getCategory().getCategoryName());
+//		}
+
+		
+//		Product product = productService.findProductById(2);
+//		System.out.println(product);
+		
+		
+//		List<User> users = userService.findUsers();
+//		for (User user : users) {
+//			System.out.println(user);
+//		}
+		
+		
+//		User user = userService.findUserById(1);
+//		System.out.println(user);
+		
+//		User user = userService.findUsersProductsById(1);
+//		System.out.println(user);
+//		List<Product> products = user.getProducts();
+//		System.out.println("Kullanýcýnýn paylaþtýðý ürünler.");
+//		
+//		for (Product product : products) {
+//			System.out.println("\t" + product);
+//		}
+		
+		
+		User user = new User(3, "Ýskender", "Çürük", new Date(new java.util.Date().getTime()), "iskobey");
+		userService.saveUser(user);
+		
+		Product product = new Product(5, "Monster", "10000", 1, new java.util.Date(), null, null, null);
+		
+	}
+
+}

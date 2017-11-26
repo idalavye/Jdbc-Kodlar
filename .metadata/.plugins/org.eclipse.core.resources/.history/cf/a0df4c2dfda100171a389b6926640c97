@@ -1,0 +1,20 @@
+package com.proje.search;
+
+import java.sql.SQLException;
+
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+
+
+public class DBProcesses {
+	
+	private static final Logger logger = LogManager.getLogger();
+	
+	public static Personel findPersonelById(int personelById){
+		
+	}
+}

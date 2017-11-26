@@ -1,0 +1,7 @@
+package com.proje.model.queries;
+
+public class ProductQueries {
+	
+	public static final String saveProductQuery = "insert int product(productId,productName,productPrice,avaible,addDate , updateDate,categoryId,brandId) values(?,?,?,?,?,?,?,?)";
+
+}

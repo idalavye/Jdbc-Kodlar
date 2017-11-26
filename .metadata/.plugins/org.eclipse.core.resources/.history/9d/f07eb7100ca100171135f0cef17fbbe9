@@ -1,0 +1,24 @@
+package com.proje.connection2;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.mysql.jdbc.Connection;
+
+public class Uygulama2 {
+	
+	private static Connection connection = null;
+	private static Logger logger = LogManager.getLogger();
+
+	public static void main(String[] args) {
+		
+	}
+	
+	private static void openConnection(){
+		
+	}
+	
+	private static void closeConnection(){
+		
+	}
+}

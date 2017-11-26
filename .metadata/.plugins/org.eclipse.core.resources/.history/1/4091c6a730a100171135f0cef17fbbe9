@@ -1,0 +1,10 @@
+package com.proje.insert1;
+
+public class Uygulama1 {
+	
+	public static void main(String[] args) {
+		
+		String sorgu = "INSERT INTO personel(personelId,adi,soyadi,dogumYili,personelNumarasi) VALUES(?,?,?,?,?)";
+	}
+
+}

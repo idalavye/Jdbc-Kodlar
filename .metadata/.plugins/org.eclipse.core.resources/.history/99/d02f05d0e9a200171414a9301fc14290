@@ -1,0 +1,7 @@
+package com.proje.model.queries;
+
+public class CategoryQueries {
+	
+	private static final String findCategoryByIdQuery = "select * from category where categoryId=?";
+
+}

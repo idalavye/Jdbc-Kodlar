@@ -1,0 +1,15 @@
+package com.proje.model;
+
+import java.sql.Date;
+
+public class User {
+	
+	private int userId;
+	
+	private String firstName;
+	
+	private String lastName;
+	
+	private Date birthOfDate; //java.sql paketini dahil ettik
+
+}

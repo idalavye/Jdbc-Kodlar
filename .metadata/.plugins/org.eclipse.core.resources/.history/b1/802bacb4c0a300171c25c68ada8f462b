@@ -1,0 +1,9 @@
+package com.proje.service.impl;
+
+import com.proje.repository.BrandRepository;
+import com.proje.repository.impl.BrandRepositoryImpl;
+
+public class BrandServiceImpl {
+
+	private BrandRepository brandRepository = new BrandRepositoryImpl();
+}
